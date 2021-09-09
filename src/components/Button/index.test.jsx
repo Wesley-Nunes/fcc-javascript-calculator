@@ -6,7 +6,11 @@ describe('Button', () => {
   render(<Button />);
   const element = screen.getByRole('button');
 
-  test('Render Button component', () => {
+  test('Button component', () => {
     expect(element).toBeInTheDocument();
+  });
+
+  test('Button component is enable', () => {
+    expect(element).toBeEnabled();
   });
 });
