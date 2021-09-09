@@ -28,7 +28,7 @@
 <hr />
 
 <h2>Preview 🎨</h2>
-<p>The preview is available in: <a href="#">calculator.</a></p>
+<p>The preview is available in: <a href="https://fcc-javascript-calculator-ten.vercel.app/">calculator.</a></p>
 
 <hr />
 
