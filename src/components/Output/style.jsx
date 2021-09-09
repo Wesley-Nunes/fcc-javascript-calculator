@@ -8,6 +8,7 @@ const StyledOutput = styled.div`
   color: ${(props) => props.fontColor};
 
   margin: 0.4rem;
+  padding-right: 2rem;
 `;
 
 export default StyledOutput;
