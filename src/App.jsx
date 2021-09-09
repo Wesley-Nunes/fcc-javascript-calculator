@@ -1,7 +1,24 @@
 import React from 'react';
+import GlobalStyles from './GlobalStyles';
+import { BotContainer, MidContainer, TopContainer } from './components';
+
+function ButtonsContainer() {
+  return (
+    <>
+      <TopContainer />
+      <MidContainer />
+      <BotContainer />
+    </>
+  );
+}
 
 function App() {
-  return <h1>Hello React!</h1>;
+  return (
+    <>
+      <GlobalStyles />
+      <ButtonsContainer />
+    </>
+  );
 }
 
 export default App;
