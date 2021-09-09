@@ -1,5 +1,6 @@
 import React from 'react';
 import GlobalStyles from './GlobalStyles';
+import StyledMain from './App.style';
 import {
   BotContainer, MidContainer, TopContainer, History, Current,
 } from './components';
@@ -27,8 +28,10 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Display />
-      <ButtonsContainer />
+      <StyledMain>
+        <Display />
+        <ButtonsContainer />
+      </StyledMain>
     </>
   );
 }
