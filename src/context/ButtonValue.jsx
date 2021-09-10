@@ -12,10 +12,14 @@ function ButtonValueProvider({ children }) {
   function setButtonValue(btnValue) {
     return setValue(btnValue);
   }
+  function resetValues() {
+    return setValue('');
+  }
 
   const contextPublicMethods = {
     getButtonValue,
     setButtonValue,
+    resetValues,
   };
 
   return (
