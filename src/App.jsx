@@ -7,22 +7,36 @@ import {
 import { ButtonValueProvider, useButtonValue } from './context/ButtonValue';
 
 function Display() {
-  const { getButtonValue } = useButtonValue();
+  const { getButtonValue, resetValues } = useButtonValue();
   const currentValue = getButtonValue();
 
   function handleMath(value) {
     const [memoValue, setMemoValue] = useState({
-      current: '',
+      current: '0',
       history: '',
     });
+    let isValueValid = false;
+    let internalValue = value;
+
+    if (typeof value === 'number') {
+      if (memoValue.current === '0') {
+        internalValue = value;
+      } else {
+        internalValue = `${memoValue.current}${value}`;
+      }
+      isValueValid = true;
+    }
 
     useEffect(() => {
-      const values = `${memoValue.current}${value.toString()}`;
-      setMemoValue({
-        current: values,
-        history: '',
-      });
-    }, [value]);
+      if (isValueValid) {
+        setMemoValue({
+          current: internalValue.toString(),
+          history: '',
+        });
+        resetValues();
+      }
+      isValueValid = false;
+    }, [isValueValid]);
 
     return memoValue.current;
   }
