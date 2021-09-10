@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Style from './style';
+import { useButtonValue } from '../../context/ButtonValue';
 
 function Button({
   fontColor, buttonColor, width, children,
 }) {
+  const { setButtonValue } = useButtonValue();
+  const handleClick = () => setButtonValue(children);
+
   return (
     <Style
       type="button"
       fontColor={fontColor}
       buttonColor={buttonColor}
       width={width}
+      onClick={handleClick}
     >
       {children}
     </Style>
