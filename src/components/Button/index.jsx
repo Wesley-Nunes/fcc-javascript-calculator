@@ -7,6 +7,7 @@ function Button({
   fontColor, buttonColor, width, children,
 }) {
   const { setButtonValue } = useButtonValue();
+  const handleClick = () => setButtonValue(children);
 
   return (
     <Style
@@ -14,7 +15,7 @@ function Button({
       fontColor={fontColor}
       buttonColor={buttonColor}
       width={width}
-      onClick={() => setButtonValue(children)}
+      onClick={handleClick}
     >
       {children}
     </Style>
