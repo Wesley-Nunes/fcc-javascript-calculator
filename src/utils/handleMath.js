@@ -1,34 +1,39 @@
 import { useState, useEffect } from 'react';
 import { useButtonValue } from '../context/ButtonValue';
 
-function handleMath(value) {
+function handleMath(insertValue) {
   const { resetValues } = useButtonValue();
   const [memoValue, setMemoValue] = useState({
     current: '0',
     history: '',
   });
-  let isValueValid = false;
-  let internalValue = value;
+  const oldMemoValue = memoValue.current;
+  let newMemoValue;
+  let hasNewValue = false;
 
-  if (typeof value === 'number') {
-    if (memoValue.current === '0') {
-      internalValue = value;
+  function handleNumbers() {
+    if (oldMemoValue === '0') {
+      newMemoValue = insertValue;
     } else {
-      internalValue = `${memoValue.current}${value}`;
+      newMemoValue = `${oldMemoValue}${insertValue}`;
     }
-    isValueValid = true;
+    hasNewValue = true;
+  }
+
+  if (typeof insertValue === 'number') {
+    handleNumbers();
   }
 
   useEffect(() => {
-    if (isValueValid) {
+    if (hasNewValue) {
       setMemoValue({
-        current: internalValue.toString(),
+        current: newMemoValue.toString(),
         history: '',
       });
       resetValues();
     }
-    isValueValid = false;
-  }, [isValueValid]);
+    hasNewValue = false;
+  }, [hasNewValue]);
 
   return memoValue.current;
 }
