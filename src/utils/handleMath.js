@@ -7,9 +7,11 @@ function handleMath(insertValue) {
     current: '0',
     history: '',
   });
+  const isNumber = /[0-9]/.test(insertValue);
+  const isValidSymbol = /[C*%+/-=.]/.test(insertValue);
   const oldMemoValue = memoValue.current;
-  let newMemoValue;
   let hasNewValue = false;
+  let newMemoValue;
 
   function handleNumbers() {
     if (oldMemoValue === '0') {
@@ -20,8 +22,25 @@ function handleMath(insertValue) {
     hasNewValue = true;
   }
 
-  if (typeof insertValue === 'number') {
+  function handleSymbols() {
+    const symbols = [
+      { name: 'C', action: newMemoValue = '0' },
+    ];
+
+    function action(name) {
+      const filtered = symbols.filter((s) => s.name === name);
+      return filtered[0].action;
+    }
+
+    action(insertValue);
+
+    hasNewValue = true;
+  }
+
+  if (isNumber) {
     handleNumbers();
+  } else if (isValidSymbol) {
+    handleSymbols();
   }
 
   useEffect(() => {
