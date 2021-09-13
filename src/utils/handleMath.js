@@ -11,7 +11,7 @@
 function handleMath(values, input) {
   const inpuIsNumber = /[0-9]/.test(input);
   const isValidSymbol = /[C*%+/-=.]/.test(input);
-  const internalValue = {
+  let internalValue = {
     current: values.current,
     history: values.history,
   };
@@ -27,7 +27,10 @@ function handleMath(values, input) {
   function handleSymbols() {
     const symbols = [{
       name: 'C',
-      action: internalValue.current = '0',
+      action: internalValue = {
+        current: '0',
+        history: '',
+      },
     }];
 
     function action(name) {
