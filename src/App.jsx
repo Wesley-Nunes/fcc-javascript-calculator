@@ -10,13 +10,17 @@ import handleMath from './utils/handleMath';
 function Display() {
   const { getButtonValue } = useButtonValue();
   const currentValue = getButtonValue();
+  const oldValue = {
+    current: '10',
+    history: '',
+  };
 
-  const current = handleMath(currentValue);
+  const newValue = handleMath(oldValue, currentValue);
 
   return (
     <>
       <History />
-      <Current value={current} />
+      <Current value={newValue.current} />
     </>
   );
 }
