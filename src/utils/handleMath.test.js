@@ -59,4 +59,9 @@ describe('handleMath', () => {
     const result = handleMath(values, input);
     expect(result.current).toBe('42-');
   });
+  test('If the input is "*", return the values.current with the multiplication symbol', () => {
+    const input = '*';
+    const result = handleMath(values, input);
+    expect(result.current).toBe('42*');
+  });
 });
