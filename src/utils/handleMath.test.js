@@ -44,4 +44,9 @@ describe('handleMath', () => {
     const result = handleMath(localValue, input);
     expect(result.current).toBe('42');
   });
+  test('If the input is "%", return the values.current with the percentage symbol', () => {
+    const input = '%';
+    const result = handleMath(values, input);
+    expect(result.current).toBe(`${result.current}%`);
+  });
 });
