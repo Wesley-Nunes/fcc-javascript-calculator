@@ -11,11 +11,10 @@
 function handleMath(values, input) {
   const inpuIsNumber = /[0-9]/.test(input);
   const isValidSymbol = /[C*%+/-=.]/.test(input);
-  let internalValue = {
+  const internalValue = {
     current: values.current,
     history: values.history,
   };
-
   function handleNumbers() {
     if (internalValue.current === '0') {
       internalValue.current = `${input}`;
@@ -25,20 +24,23 @@ function handleMath(values, input) {
   }
 
   function handleSymbols() {
-    const symbols = [{
-      name: 'C',
-      action: internalValue = {
-        current: '0',
-        history: '',
+    const symbols = [
+      {
+        name: 'C',
+        action: '0',
       },
-    }];
+      {
+        // TODO: make substring with the last number in internalValue.current
+        name: '+/-',
+        action: internalValue.current > 0 ? `(-${internalValue.current}` : internalValue.current.slice(2),
+      },
+    ];
 
     function action(name) {
       const filtered = symbols.filter((s) => s.name === name);
       return filtered[0].action;
     }
-
-    action(input);
+    internalValue.current = action(input);
   }
 
   if (inpuIsNumber) {

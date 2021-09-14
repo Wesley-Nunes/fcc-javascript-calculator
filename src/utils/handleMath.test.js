@@ -26,11 +26,29 @@ describe('handleMath', () => {
   test('If input is "C", return result.current equals "0", and result.history as empty string', () => {
     const value = {
       current: '55-14',
-      history: '168/8+',
+      history: '',
     };
     const input = 'C';
     const result = handleMath(value, input);
     expect(result.current).toBe('0');
     expect(result.history).toBe('');
+  });
+  test('If the input is "+/-" and if the value.current is a positive number, return the value.current in negative form', () => {
+    const value = {
+      current: '20',
+      history: '',
+    };
+    const input = '+/-';
+    const result = handleMath(value, input);
+    expect(result.current).toBe('(-20');
+  });
+  test('If the input is "+/-" and if the value.current is a negative number, return the value.current in positive form', () => {
+    const value = {
+      current: '(-42',
+      history: '',
+    };
+    const input = '+/-';
+    const result = handleMath(value, input);
+    expect(result.current).toBe('42');
   });
 });
