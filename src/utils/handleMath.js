@@ -50,6 +50,10 @@ function handleMath(values, input) {
         name: '*',
         action: `${internalValue.current}*`,
       },
+      {
+        name: '/',
+        action: `${internalValue.current}/`,
+      },
     ];
     function action(name) {
       const filtered = symbols.filter((s) => s.name === name);
