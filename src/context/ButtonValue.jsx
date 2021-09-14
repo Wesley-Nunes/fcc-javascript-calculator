@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const ButtonValueContext = createContext('');
 
 function ButtonValueProvider({ children }) {
-  const [value, setValue] = useState('0');
+  const [value, setValue] = useState('');
 
   function getButtonValue() {
     return value;

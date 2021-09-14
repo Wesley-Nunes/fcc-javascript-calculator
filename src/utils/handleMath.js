@@ -1,60 +1,78 @@
-import { useState, useEffect } from 'react';
-import { useButtonValue } from '../context/ButtonValue';
-
-function handleMath(insertValue) {
-  const { resetValues } = useButtonValue();
-  const [memoValue, setMemoValue] = useState({
-    current: '0',
-    history: '',
-  });
-  const isNumber = /[0-9]/.test(insertValue);
-  const isValidSymbol = /[C*%+/-=.]/.test(insertValue);
-  const oldMemoValue = memoValue.current;
-  let hasNewValue = false;
-  let newMemoValue;
-
+/**
+ * handleMath make math operations based on string(math symbol) or number inputed
+ *
+ * @param  {object} values
+ *           {string} values.history - memorized math expression
+ *           {string} values.current - the current math expression
+ * @param  {string || number} input  - numbers[0-9] or math symbols( / * - + % . = )
+ * @return {object} internalValue object(string) with two keys: [history, current]
+ * updated with  the input
+ */
+function handleMath(values, input) {
+  const inpuIsNumber = /[0-9]/.test(input);
+  const isValidSymbol = /[C*%+/\-=.]/.test(input);
+  const internalValue = {
+    current: values.current,
+    history: values.history,
+  };
   function handleNumbers() {
-    if (oldMemoValue === '0') {
-      newMemoValue = insertValue;
+    if (internalValue.current === '0') {
+      internalValue.current = `${input}`;
     } else {
-      newMemoValue = `${oldMemoValue}${insertValue}`;
+      internalValue.current = `${internalValue.current}${input}`;
     }
-    hasNewValue = true;
   }
 
   function handleSymbols() {
+    // TODO: make substring with the last number in internalValue.current
     const symbols = [
-      { name: 'C', action: newMemoValue = '0' },
+      {
+        name: 'C',
+        action: '0',
+      },
+      {
+        name: '+/-',
+        action: internalValue.current > 0 ? `(-${internalValue.current}` : internalValue.current.slice(2),
+      },
+      {
+        name: '%',
+        action: `${internalValue.current}%`,
+      },
+      {
+        name: '+',
+        action: `${internalValue.current}+`,
+      },
+      {
+        name: '-',
+        action: `${internalValue.current}-`,
+      },
+      {
+        name: '*',
+        action: `${internalValue.current}*`,
+      },
+      {
+        name: '/',
+        action: `${internalValue.current}/`,
+      },
+      {
+        name: '.',
+        action: `${internalValue.current}.`,
+      },
     ];
-
     function action(name) {
       const filtered = symbols.filter((s) => s.name === name);
       return filtered[0].action;
     }
-
-    action(insertValue);
-
-    hasNewValue = true;
+    internalValue.current = action(input);
   }
 
-  if (isNumber) {
+  if (inpuIsNumber) {
     handleNumbers();
   } else if (isValidSymbol) {
     handleSymbols();
   }
 
-  useEffect(() => {
-    if (hasNewValue) {
-      setMemoValue({
-        current: newMemoValue.toString(),
-        history: '',
-      });
-      resetValues();
-    }
-    hasNewValue = false;
-  }, [hasNewValue]);
-
-  return memoValue.current;
+  return internalValue;
 }
 
 export default handleMath;
