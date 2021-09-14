@@ -47,6 +47,6 @@ describe('handleMath', () => {
   test('If the input is "%", return the values.current with the percentage symbol', () => {
     const input = '%';
     const result = handleMath(values, input);
-    expect(result.current).toBe(`${result.current}%`);
+    expect(result.current).toBe('42%');
   });
 });

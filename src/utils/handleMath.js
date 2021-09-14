@@ -34,6 +34,10 @@ function handleMath(values, input) {
         name: '+/-',
         action: internalValue.current > 0 ? `(-${internalValue.current}` : internalValue.current.slice(2),
       },
+      {
+        name: '%',
+        action: `${internalValue.current}%`,
+      },
     ];
 
     function action(name) {
