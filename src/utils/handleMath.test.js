@@ -33,11 +33,11 @@ describe('handleMath', () => {
   test('If the input is "+/-" and if the values.current is a positive number, return the values.current in negative form', () => {
     const input = '+/-';
     const result = handleMath(values, input);
-    expect(result.current).toBe('(-42');
+    expect(result.current).toBe('-42');
   });
   test('If the input is "+/-" and if the values.current is a negative number, return the values.current in positive form', () => {
     const localValue = {
-      current: '(-42',
+      current: '-42',
       history: '',
     };
     const input = '+/-';
