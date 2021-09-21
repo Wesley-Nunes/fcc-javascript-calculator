@@ -70,9 +70,17 @@ function handleMath(values, input) {
     internalValue.current = action(input);
   }
 
+  function handleDuplicates() {
+    const lastValueIsOperator = /[*%+/-]/.test(internalValue.current[internalValue.current.length - 1]);
+    if (lastValueIsOperator) {
+      internalValue.current = internalValue.current.slice(0, -1);
+    }
+  }
+
   if (inpuIsNumber) {
     handleNumbers();
   } else if (isValidSymbol) {
+    handleDuplicates();
     handleSymbols();
   }
 
