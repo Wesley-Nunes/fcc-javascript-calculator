@@ -74,4 +74,24 @@ describe('handleMath', () => {
     const result = handleMath(values, input);
     expect(result.current).toBe('42.');
   });
+  test('If the input is "=" and if the values.current is "2*2", return the values.current = "4"', () => {
+    const localValue = {
+      current: '2*2',
+      history: '',
+    };
+    const input = '=';
+    const result = handleMath(localValue, input);
+    expect(result.history).toBe('2*2');
+    expect(result.current).toBe('4');
+  });
+  test('If the input is "=" and if the values.current is "2/2", return the values.current = "1"', () => {
+    const localValue = {
+      current: '2/2',
+      history: '',
+    };
+    const input = '=';
+    const result = handleMath(localValue, input);
+    expect(result.history).toBe('2/2');
+    expect(result.current).toBe('1');
+  });
 });
