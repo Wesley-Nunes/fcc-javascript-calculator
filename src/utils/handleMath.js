@@ -1,3 +1,5 @@
+import doCalculations from './doCalculations';
+
 /**
  * handleMath make math operations based on string(math symbol) or number inputed
  *
@@ -10,11 +12,12 @@
  */
 function handleMath(values, input) {
   const inpuIsNumber = /[0-9]/.test(input);
-  const isValidSymbol = /[C*%+/\-=.]/.test(input);
+  const isValidSymbol = /[C*%+/\-.]/.test(input);
   const internalValue = {
     current: values.current,
     history: values.history,
   };
+
   function handleNumbers() {
     if (internalValue.current === '0') {
       internalValue.current = `${input}`;
@@ -24,7 +27,6 @@ function handleMath(values, input) {
   }
 
   function handleSymbols() {
-    // TODO: make substring with the last number in internalValue.current
     const symbols = [
       {
         name: 'C',
@@ -32,7 +34,7 @@ function handleMath(values, input) {
       },
       {
         name: '+/-',
-        action: internalValue.current > 0 ? `(-${internalValue.current}` : internalValue.current.slice(2),
+        action: internalValue.current > 0 ? `-${internalValue.current}` : internalValue.current.slice(1),
       },
       {
         name: '%',
@@ -59,17 +61,32 @@ function handleMath(values, input) {
         action: `${internalValue.current}.`,
       },
     ];
+
     function action(name) {
       const filtered = symbols.filter((s) => s.name === name);
       return filtered[0].action;
     }
+
     internalValue.current = action(input);
+  }
+
+  function handleDuplicates() {
+    const lastValueIsOperator = /[*%+/-]/.test(internalValue.current[internalValue.current.length - 1]);
+    if (lastValueIsOperator) {
+      internalValue.current = internalValue.current.slice(0, -1);
+    }
   }
 
   if (inpuIsNumber) {
     handleNumbers();
   } else if (isValidSymbol) {
+    handleDuplicates();
     handleSymbols();
+  }
+
+  if (input === '=') {
+    internalValue.history = internalValue.current;
+    internalValue.current = doCalculations(internalValue.current);
   }
 
   return internalValue;
