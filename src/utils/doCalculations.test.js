@@ -37,4 +37,12 @@ describe('doCalculations', () => {
     const output = doCalculations('3+5*6-2/4');
     expect(output).toBe('32.5');
   });
+  test('input: "600*15%" should return "90"', () => {
+    const output = doCalculations('600*15%');
+    expect(output).toBe('90');
+  });
+  test('input: "600/15%" should return "4000"', () => {
+    const output = doCalculations('600/15%');
+    expect(output).toBe('4000');
+  });
 });

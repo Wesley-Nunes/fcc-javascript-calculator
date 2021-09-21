@@ -10,7 +10,7 @@ function doCalculations(input) {
     const expressionSplited = [];
     let start = 0;
 
-    for (let i = 0; i <= expression.length; i += 1) {
+    for (let i = 0; i < expression.length; i += 1) {
       if (operators.includes(expression[i])) {
         const item = expression.slice(start, i);
 
@@ -34,7 +34,7 @@ function doCalculations(input) {
   function negativeNumbers(expression) {
     const fixedExp = expression.slice();
 
-    for (let i = 0; i <= fixedExp.length; i += 1) {
+    for (let i = 0; i < fixedExp.length; i += 1) {
       const isNegativeAndAnOperatorFollows = fixedExp[i] === '-' && operators.includes(fixedExp[i - 1]);
       const isNegativeAndIsTheFirstNumber = fixedExp[i] === '-' && fixedExp.indexOf('-') === 0;
 
@@ -45,6 +45,24 @@ function doCalculations(input) {
       }
     }
 
+    return fixedExp;
+  }
+
+  /**
+  * percentNumbers: Transform percent numbers in valid value
+  * @param  {Array} expression Expression in array type
+  * @return {Array}            Expression in array type fixed
+  */
+  function percentNumbers(expression) {
+    const fixedExp = expression.slice();
+
+    for (let i = 0; i < fixedExp.length; i += 1) {
+      if (fixedExp[i].includes('%')) {
+        const number = fixedExp[i].slice(0, fixedExp[i].length - 1);
+
+        fixedExp.splice(i, 1, (number / 100).toString());
+      }
+    }
     return fixedExp;
   }
 
@@ -88,9 +106,12 @@ function doCalculations(input) {
         miniExp = expWithMiniExp.slice(start, end + 1);
         expWithMiniExp.splice(start, miniExp.length, miniExp);
 
-        if (typeof miniExp !== 'undefined' || count >= operators.length - 1) {
+        if (typeof miniExp !== 'undefined') {
           keepGoing = false;
         }
+      }
+      if (count >= operators.length - 1) {
+        keepGoing = false;
       } else {
         count += 1;
       }
@@ -150,6 +171,7 @@ function doCalculations(input) {
   // update the expression and repeat the process until has only the result to return
   const myExpression = split(input);
   let expressionFixed = negativeNumbers(myExpression);
+  expressionFixed = percentNumbers(expressionFixed);
   let expressionWithMiniExp;
   let result;
 
