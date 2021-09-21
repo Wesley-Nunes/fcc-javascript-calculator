@@ -12,7 +12,7 @@ function BotContainer() {
     {
       name: '=',
       buttonColor: 'hsl(175, 65%, 65%)',
-      width: '12.8rem',
+      width: '13rem',
       fontColor: 'black',
     },
   ];
