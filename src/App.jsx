@@ -15,7 +15,6 @@ function Display() {
     history: '',
   });
   const newValue = handleMath(value, currentValue);
-
   useEffect(() => {
     setValue(newValue);
     resetValues();
@@ -23,7 +22,7 @@ function Display() {
 
   return (
     <>
-      <History />
+      <History value={value.history} />
       <Current value={value.current} />
     </>
   );
