@@ -26,6 +26,13 @@ function handleMath(values, input) {
     }
   }
 
+  function handleDuplicates() {
+    const lastValueIsOperator = /[*%+/-]/.test(internalValue.current[internalValue.current.length - 1]);
+    if (lastValueIsOperator) {
+      internalValue.current = internalValue.current.slice(0, -1);
+    }
+  }
+
   function handleSymbols() {
     const symbols = [
       {
@@ -70,16 +77,14 @@ function handleMath(values, input) {
     internalValue.current = action(input);
   }
 
-  function handleDuplicates() {
-    const lastValueIsOperator = /[*%+/-]/.test(internalValue.current[internalValue.current.length - 1]);
-    if (lastValueIsOperator) {
-      internalValue.current = internalValue.current.slice(0, -1);
-    }
-  }
-
   if (inpuIsNumber) {
     handleNumbers();
   } else if (isValidSymbol) {
+    // Prevent multiple dots in one single number
+    const isDecimalNumber = /[.]/.test(internalValue.current);
+    if (isDecimalNumber && input === '.') {
+      return internalValue;
+    }
     handleDuplicates();
     handleSymbols();
   }
