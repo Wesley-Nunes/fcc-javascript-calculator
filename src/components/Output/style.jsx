@@ -9,6 +9,8 @@ const StyledOutput = styled.div`
 
   margin: 0.4rem;
   padding-right: 2rem;
+
+  overflow-x: scroll;
 `;
 
 export default StyledOutput;
