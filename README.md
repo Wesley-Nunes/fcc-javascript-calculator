@@ -12,7 +12,7 @@
 <hr />
 
 <h3> 
-	🚧  Calculator :abacus: In Progress  🚧
+	✅   Calculator :abacus: Concluded ✅ 
 </h3>
 
 <hr />
