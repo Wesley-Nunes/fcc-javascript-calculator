@@ -30,20 +30,6 @@ describe('handleMath', () => {
     expect(result.current).toBe('0');
     expect(result.history).toBe('');
   });
-  test('If the input is "+/-" and if the values.current is a positive number, return the values.current in negative form', () => {
-    const input = '+/-';
-    const result = handleMath(values, input);
-    expect(result.current).toBe('-42');
-  });
-  test('If the input is "+/-" and if the values.current is a negative number, return the values.current in positive form', () => {
-    const localValue = {
-      current: '-42',
-      history: '',
-    };
-    const input = '+/-';
-    const result = handleMath(localValue, input);
-    expect(result.current).toBe('42');
-  });
   test('If the input is "%", return the values.current with the percentage symbol', () => {
     const input = '%';
     const result = handleMath(values, input);

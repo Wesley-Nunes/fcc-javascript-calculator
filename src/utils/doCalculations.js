@@ -1,5 +1,5 @@
 function doCalculations(input) {
-  const operators = '*/+-';
+  const operators = '*/-+';
 
   /**
     * split:  Transform the expression from string to array
