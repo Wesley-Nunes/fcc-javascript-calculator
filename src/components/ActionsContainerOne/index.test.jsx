@@ -6,7 +6,6 @@ test('should render four buttons with text values', () => {
   render(<ActionsContainerOne />);
 
   expect(screen.getByText('C')).toBeInTheDocument();
-  expect(screen.getByText('+/-')).toBeInTheDocument();
   expect(screen.getByText('%')).toBeInTheDocument();
   expect(screen.getByText('+')).toBeInTheDocument();
 });

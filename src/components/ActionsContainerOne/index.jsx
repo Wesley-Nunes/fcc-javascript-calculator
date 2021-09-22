@@ -5,9 +5,7 @@ function ActionsContainerOne() {
   const values = [
     {
       name: 'C',
-    },
-    {
-      name: '+/-',
+      width: '13rem',
     },
     {
       name: '%',
@@ -19,7 +17,7 @@ function ActionsContainerOne() {
   ];
 
   return values.map((value) => (
-    <Button key={value.name} buttonColor={value.buttonColor}>
+    <Button key={value.name} buttonColor={value.buttonColor} width={value.width}>
       {value.name}
     </Button>
   ));

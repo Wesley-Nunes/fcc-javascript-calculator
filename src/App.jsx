@@ -19,11 +19,10 @@ function Display() {
     setValue(newValue);
     resetValues();
   }, [currentValue]);
-
   return (
     <>
-      <History value={value.history} />
-      <Current value={value.current} />
+      <History value={newValue.history} />
+      <Current value={newValue.current} />
     </>
   );
 }
